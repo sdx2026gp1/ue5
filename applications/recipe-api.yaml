@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: recipe-service
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/sdx2026gp1/ue5.git
+    targetRevision: main
+    path: charts/recipe-service
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: recipe-service
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
